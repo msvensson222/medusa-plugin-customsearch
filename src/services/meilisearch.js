@@ -57,6 +57,12 @@ class MeiliSearchService extends SearchService {
     if (query == ""){
       console.log("Query is empty!")
     }
+    let endpointURL = options.additionalOptions.options.endpointURL
+    console.log("----Endpoint URL:----")
+    console.log(endpointURL)
+    let apiKey = options.additionalOptions.options.apiKey
+    console.log("----API KEY:----")
+    console.log(apiKey)
     console.log("----QUERY:----")
     console.log(query)
     let languageCode = options.additionalOptions.options.languageCode
@@ -65,12 +71,13 @@ class MeiliSearchService extends SearchService {
     let topN = options.additionalOptions.options.nProductsToRetrieve
     console.log("----topN code:----")
     console.log(topN)
-    const url = "http://127.0.0.1:5000/search"
-    let response = await fetch(url, {
+    
+    let response = await fetch(endpointURL, {
         method: 'POST',
         body: JSON.stringify({"q": query, "languageCode": languageCode, "topN": topN}),
         headers: { // Add auth
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'apiKey': apiKey
         },
       });
 
