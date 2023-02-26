@@ -1,18 +1,18 @@
 {
   "name": "medusa-plugin-customsearch",
   "version": "1.0.0",
-  "description": "A starter for Medusa projects.",
+  "description": "A custom search plugin inspired by meilisearch",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/medusajs/medusa",
+    "url": "https://github.com/msvensson222/medusa-plugin-customsearch",
     "directory": "packages/medusa-plugin-customsearch"
   },
-  "author": "Zakaria El Asri",
+  "author": "Marcus Svensson",
   "license": "MIT",
   "scripts": {
     "build": "babel src -d .",
-    "prepare": "cross-env NODE_ENV=production yarn run build",
+    "prepare": "cross-env NODE_ENV=production npm run build",
     "watch": "babel -w src --out-dir . --ignore **/__tests__",
     "test": "jest --passWithNoTests"
   },

@@ -4,6 +4,8 @@ import { SearchService } from "medusa-interfaces"
 import { transformProduct } from "../utils/transform-product"
 import fetch from "node-fetch";
 
+// Have justed changed the implementation of MeiliSearchService to 
+// call my custom backend API
 class MeiliSearchService extends SearchService {
   constructor(container, options) {
     super()
@@ -58,43 +60,23 @@ class MeiliSearchService extends SearchService {
       console.log("Query is empty!")
     }
     let endpointURL = options.additionalOptions.options.endpointURL
-    console.log("----Endpoint URL:----")
-    console.log(endpointURL)
     let apiKey = options.additionalOptions.options.apiKey
-    console.log("----API KEY:----")
-    console.log(apiKey)
-    console.log("----QUERY:----")
-    console.log(query)
     let languageCode = options.additionalOptions.options.languageCode
-    console.log("----Language code:----")
-    console.log(languageCode)
     let topN = options.additionalOptions.options.nProductsToRetrieve
-    console.log("----topN code:----")
-    console.log(topN)
-    
+
     let response = await fetch(endpointURL, {
         method: 'POST',
         body: JSON.stringify({"q": query, "languageCode": languageCode, "topN": topN}),
-        headers: { // Add auth
+        headers: {
             'Content-Type': 'application/json',
             'apiKey': apiKey
         },
       });
-
-    console.log("Returning")
-    // return await response.json()
     return JSON.stringify(await response.json())
-    // return Promise.resolve(response)
-
-    // const { paginationOptions, filter, additionalOptions } = options
-    // return await this.client_
-    //   .index(indexName)
-    //   .search(query, { filter, ...paginationOptions, ...additionalOptions })
   }
 
   async updateSettings(indexName, settings) {
     return null
-    //return await this.client_.index(indexName).updateSettings(settings)
   }
 
   getTransformedDocuments(type, documents) {
